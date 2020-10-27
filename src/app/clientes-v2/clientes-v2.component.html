@@ -1,0 +1,71 @@
+
+<div class="card border-primary my-3">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-xs-12 col-md-12" *ngIf="authorities.includes('ROLE_ADMIN') || authorities.includes('ROLE_USER')">
+                <button class="btn btn-primary" [routerLink]="['/clientes/form']" type="button">
+                    <i class="fas fa-save mr-1"></i>NUEVO</button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div style="width: 100%;">
+            <div class="table-responsive">
+                <table id="tbCliente" datatable [dtOptions]="dtOptions" class="table table-bordered table-hover dt-responsive display nowrap">
+                    <thead>
+                        <tr>    
+                            <th *ngIf="authorities.includes('ROLE_ADMIN')">OPCIÓN</th>
+                            <th>RAZÓN SOCIAL</th>
+                            <th>RUC</th>
+                            <th>TELEFONO</th>
+                            <th>TIPO TELEFONO</th>
+                            <th>PAGINA WEB</th>     
+                            <th>DIRECCIÓN</th> 
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="clientes?.length != 0">
+                        <tr *ngFor="let cliente of clientes">   
+                            <td *ngIf="authorities.includes('ROLE_ADMIN')">
+                                <button type="button" name="button" class="btn btn-warning btn-sm mr-1"
+                                    [routerLink]="['/clientes/form', cliente.id]"><i class="fas fa-edit"></i></button>                                
+                                <button type="button" name="eliminar" class="btn btn-danger btn-sm"
+                                    (click)= 'delete( cliente )'><i class="fas fa-trash"></i></button>                                                    
+                            </td>                     
+                            <td>{{cliente.razonSocial}}</td>
+                            <td>{{cliente.ruc}}</td>
+                            <td>{{cliente.telefono}}</td>
+                            <td>{{cliente.tipoTelefono}}</td>
+                            <td>{{cliente.paginaWeb}}</td>
+                            <td>{{cliente.direccion}}</td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="clientes?.length == 0">
+                        <tr>
+                          <td colspan="7" class="no-data-available">No hay clientes registrados!</td>
+                        </tr>
+                    <tbody>
+                    <tfoot>
+                        <tr>
+                            <th *ngIf="authorities.includes('ROLE_ADMIN')"></th>
+                            <th><input type="text" class="form-control" name="search-razon-social"/></th>
+                            <th><input type="text" class="form-control" name="search-ruc"/></th>
+                            <th><input type="text" class="form-control" name="search-telefono"/></th>
+                            <th>
+                                <select class="form-control">
+                                    <option value=""></option>
+                                    <option value="MOVIL">MOVIL</option>
+                                    <option value="FIJO">FIJO</option>
+                                </select>
+                            </th>
+                            <th><input type="text" class="form-control" name="search-pagina-web"/></th>
+                            <th><input type="text" class="form-control" name="search-direccion"/></th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+        </div>
+        
+    </div>
+</div>
+

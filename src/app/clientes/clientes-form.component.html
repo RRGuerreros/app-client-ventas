@@ -1,0 +1,72 @@
+<div class="card bg-dark text-white">
+    <div class="card-header">
+        <h3>Formulario cliente</h3>
+    </div>
+    <div class="card-body">
+        <form #f="ngForm" novalidate>
+            <div class="form-group row">
+                <label for="razonSocial" class="col-form-label col-xs-12 offset-sm-2 col-sm-2">Razón social</label>
+                <div class="col-xs-12 col-sm-6">
+                    <input type="text" class="form-control" [(ngModel)]="cliente.razonSocial" #razonSocial="ngModel" name="razonSocial" required>
+                    <div class="alert alert-danger" *ngIf="razonSocial.invalid && razonSocial.touched">
+                        <div *ngIf="razonSocial.errors.required">el campo no puede estar vacio</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="ruc" class="col-form-label col-xs-12 offset-sm-2 col-sm-2">RUC</label>
+                <div class="col-xs-12 col-sm-6">
+                    <input type="text" class="form-control" [(ngModel)]="cliente.ruc" #ruc="ngModel" name="ruc" required>
+                    <div class="alert alert-danger" *ngIf="ruc.invalid && ruc.touched">
+                        <div *ngIf="ruc.errors.required">el campo no puede estar vacio</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="direccion" class="col-form-label col-xs-12 offset-sm-2 col-sm-2">Dirección</label>
+                <div class="col-xs-12 col-sm-6">
+                    <input type="text" class="form-control" [(ngModel)]="cliente.direccion" #direccion="ngModel" name="direccion" required>
+                    <div class="alert alert-danger" *ngIf="direccion.invalid && direccion.touched">
+                        <div *ngIf="direccion.errors.required">el campo no puede estar vacio</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="tipoTelefono" class="col-form-label col-xs-12 offset-sm-2 col-sm-2">Tipo de Telefono</label>
+                <div class="col-xs-12 col-sm-6">
+                    <select name="tipoTelefono" class="form-control" [(ngModel)]="cliente.tipoTelefono" #tipoTelefono="ngModel" required>             
+                        <option *ngFor="let tipo of allTipos" [ngValue]="tipo.id">{{ tipo.label }}</option>
+                    </select>
+                    <div class="alert alert-danger" *ngIf="tipoTelefono.touched && tipoTelefono.invalid">
+                        <div *ngIf="tipoTelefono.errors.required">campo requerido</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="telefono" class="col-form-label col-xs-12 offset-sm-2 col-sm-2">Telefono</label>
+                <div class="col-xs-12 col-sm-6">
+                    <input type="text" class="form-control" [(ngModel)]="cliente.telefono" #telefono="ngModel" name="telefono" required>
+                    <div class="alert alert-danger" *ngIf="telefono.invalid && telefono.touched">
+                        <div *ngIf="telefono.errors.required">{{tipoTelefono.valid}} el campo no puede estar vacio</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="paginaWeb" class="col-form-label col-xs-12 offset-sm-2 col-sm-2">Página web</label>
+                <div class="col-xs-12 col-sm-6">
+                    <input type="text" class="form-control" [(ngModel)]="cliente.paginaWeb" name="paginaWeb" id="paginaWeb">                    
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-xs-12 offset-sm-4 col-sm-6">
+                    <button (click)="enviar()" class="btn btn-success btn-block"
+                        role="button" [disabled]="!f.valid" *ngIf="cliente.id == undefined else elseBlock">Guardar</button>
+                    <ng-template #elseBlock>
+                        <button class="btn btn-success btn-block" role="button"
+                        [disabled]="!f.valid" (click) = 'update()'>Guardar cambios</button>
+                    </ng-template>
+                </div>                
+            </div>
+        </form>
+    </div>
+</div>

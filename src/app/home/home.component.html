@@ -1,0 +1,11 @@
+<div *ngIf="isLoggedIn; else loggedOut">
+    BIENVENIDO AL SISTEMA, SU ROL ES -> {{ roles }}
+</div>
+
+<ng-template #loggedOut>
+
+    <h3>BIENVENIDO AL SISTEMA</h3>
+
+    <a [routerLink]="['/login']">Iniciar sesión para continuar</a>
+    
+</ng-template>

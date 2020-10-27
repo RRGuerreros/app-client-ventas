@@ -1,0 +1,44 @@
+<div class="card border-primary my-3">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <button class="btn btn-primary" [routerLink]="['/clientes/form']" type="button">
+                    <i class="fas fa-save mr-1"></i>NUEVO</button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-hover nowrap">
+                <thead>
+                    <tr>  
+                        <td>OPCIÓN</td>   
+                        <td>RAZÓN SOCIAL</td>
+                        <td>RUC</td>
+                        <td>TELEFONO</td>
+                        <td>TIPO TELEFONO</td>
+                        <td>PAGINA WEB</td>     
+                        <td>DIRECCIÓN</td> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cliente of clientes">
+                        <td>
+                            <button type="button" name="button" class="btn btn-primary btn-sm mr-1"
+                                [routerLink]="['/clientes/form', cliente.id]"><i class="fas fa-edit"></i></button>                                
+                            <button type="button" name="eliminar" class="btn btn-danger btn-sm"
+                                (click)= 'delete( cliente )'><i class="fas fa-trash"></i></button>                                                    
+                        </td>
+                        <td>{{cliente.razonSocial}}</td>
+                        <td>{{cliente.ruc}}</td>
+                        <td>{{cliente.telefono}}</td>
+                        <td>{{cliente.tipoTelefono}}</td>
+                        <td>{{cliente.paginaWeb}}</td>
+                        <td>{{cliente.direccion}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
